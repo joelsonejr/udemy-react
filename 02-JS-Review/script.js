@@ -144,7 +144,7 @@ function getBook(id) {
 }
 
 //# Chapter 02 - JS Review
-
+/* 
 const book = getBook(3);
 
 //## Desctructuring Objects
@@ -247,6 +247,37 @@ const getTotalReviewCount = (book) => {
 };
 
 console.log(getTotalReviewCount(book));
-
+ */
 ///////////////////////////////////////////////////////////////////////
 //Array Map Method
+// Map loop over an array, and return a new array with the same length, with some
+// operation applied to each element of the original array
+
+const books = getBooks();
+
+const getTotalReviewCount = (book) => {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  return goodreads + librarything;
+};
+
+//Example of map
+[1, 2, 3, 4, 5];
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewCount: getTotalReviewCount(book),
+}));
+//os parênteses são para garantir que o objeto seja retornado corretamente.
+
+essentialData;
+
+///////////////////////////////////////////////////////////////////////
+//Array Filter Method
