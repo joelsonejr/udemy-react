@@ -281,3 +281,43 @@ essentialData;
 
 ///////////////////////////////////////////////////////////////////////
 //Array Filter Method
+const longBooks = books.filter((book) => book.pages > 500);
+longBooks;
+
+const longBooksWithMovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => book.title);
+
+adventureBooks;
+
+///////////////////////////////////////////////////////////////////////
+//Array Reduce Method
+//Good for performing arithimetic operations on arrays
+const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+pagesAllBooks;
+
+///////////////////////////////////////////////////////////////////////
+//Array Sort Method
+//This method changes de original array
+const y = [3, 7, 1, 9, 6];
+const sorted = y.sort((a, b) => a - b); //sorting in a ascending way
+sorted;
+y;
+// a and b are always the current value and the next value, respectively
+
+const sorted2 = y.sort((a, b) => b - a);
+sorted2;
+y;
+
+//To avoid messing with the original array, we can make a copy of it, using
+//slice
+const sorted3 = y.slice().sort((a, b) => a - b);
+sorted3;
+y;
+
+const sortedBooks = books.slice().sort((a, b) => b.pages - a.pages);
+sortedBooks;
