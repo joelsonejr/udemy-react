@@ -252,7 +252,7 @@ console.log(getTotalReviewCount(book));
 //Array Map Method
 // Map loop over an array, and return a new array with the same length, with some
 // operation applied to each element of the original array
-
+/* 
 const books = getBooks();
 
 const getTotalReviewCount = (book) => {
@@ -321,3 +321,35 @@ y;
 
 const sortedBooks = books.slice().sort((a, b) => b.pages - a.pages);
 sortedBooks;
+
+///////////////////////////////////////////////////////////////////////
+//Working with immutable Arrays
+//1)Add a book
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J.K.Rowling",
+};
+
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+//2) Delete book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+//3) Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
+ */
+
+/////////////////////////////////////////////////////////////////////
+//Asynchronous JavaScript: Promises
+
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((resp) => resp.json())
+  .then((data) => console.log(data));
+
+console.log(`Print after request`);
