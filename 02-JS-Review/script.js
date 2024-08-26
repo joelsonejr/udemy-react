@@ -347,9 +347,18 @@ booksAfterUpdate;
 
 /////////////////////////////////////////////////////////////////////
 //Asynchronous JavaScript: Promises
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((resp) => resp.json())
+//   .then((data) => console.log(data));
 
-fetch("https://jsonplaceholder.typicode.com/todos")
-  .then((resp) => resp.json())
-  .then((data) => console.log(data));
+// console.log(`Print after request`);
 
-console.log(`Print after request`);
+/////////////////////////////////////////////////////////////////////
+//Asynchronous JavaScript: Async/ Await
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+}
+
+getTodos();
