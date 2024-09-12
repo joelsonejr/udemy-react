@@ -73,6 +73,32 @@ const Menu = () => {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
+      {/* 
+       ## Renderizando as Pizzas utilizando o Map 
+      <div>
+        {pizzaData.map((pizza) => (
+          <Pizza
+            name={pizza.name}
+            ingredients={pizza.ingredients}
+            photoName={pizza.photoName}
+            price={pizza.price}
+          ></Pizza>
+        ))}
+      </div>
+      
+      ## Essa não é a forma mais usual de fazer. O mais indicado é passar todo o 
+      objeto para o componente, via props, e dentro do componente, pegar a 
+      informação que é necessária.
+      */}
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name}></Pizza>
+        ))}
+      </ul>
+
+      {/* 
+        ## Renderizando os objetos um por um (manualmente)
       <Pizza
         name="Pizza Spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
@@ -84,23 +110,23 @@ const Menu = () => {
         ingredients="Tomato, mushrooms"
         price={12}
         photoName="pizzas/funghi.jpg"
-      ></Pizza>
+      ></Pizza> */}
     </main>
   );
 };
 
-function Pizza(props) {
+const Pizza = (props) => {
   return (
-    <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h3>{props.name}</h3>
-        <p>{props.ingredients}</p>
-        <span>{props.price}</span>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price + 3}</span>
       </div>
-    </div>
+    </li>
   );
-}
+};
 
 const Footer = () => {
   const hour = new Date().getHours();
