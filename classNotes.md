@@ -48,7 +48,7 @@ root.render(
     return <h1>Hello React!</h1>;
   };
   
-  React.render(<App />);
+  React.render(<App />, document.getElementById("root"));
   ```
 
   
@@ -76,4 +76,119 @@ root.render(
 );
 
 ```
+
+
+
+### 35 . Components as Building Blocks
+
+- React applications are entirely made out of components.
+
+- React renders a view for each component, and all those views toghther make up the UI.
+
+- Each componente has it's own data, logic and appearence.
+
+- Components can be reused, and nested inside other components.
+
+  
+
+### 36. Creating and Reusing a Component
+
+- In React, we create components using functions.
+
+- The function name has to start with an upper case letterr.
+
+- The funciton must return some markup (ussualy in form of a jsx)
+
+  ```react
+  function Pizza() {
+  	return <h2>Pizza</h2>
+  }
+  ```
+
+- For the component to be displayed in the screen, it should be used inside of the component wich is being redered on the screen. 
+
+  ```react
+  // Arquivo ./src/index.js
+  
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  
+  const App = () => {
+    return <h1>Hello React!</h1> <Pizza />;
+  };
+  
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+      <App />
+  );
+  ```
+
+  
+
+- Each component can only return one element. So, in order to avoid an error, the return of the App component shoul de encapsulated inside of a *div* .
+
+- Once the *Pizza* component is nested inside *App* it will be presented on the screen. Pizza is nested inside of App.
+
+- What should be nested is the component, and not it's declaration. 
+
+  ```react
+  // Arquivo ./src/index.js
+  
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  
+  const App = () => {
+    return(
+        <div>
+            <h1>Hello React!</h1> 
+            <Pizza />
+        </div>
+    );
+  };
+  
+  const root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(
+      <App />
+  );
+  ```
+
+  
+
+  - Below, more data is added to the pizza component. This data was copied from the file data.js
+
+  ```typescript
+  function Pizza() {
+  	return <div>
+  		<img src="pizzas/spinaci.jpg" alt="Pizza spinaci />
+  		<h2>Pizza Spinachi</h2>
+  		<p>Tomato, mozarella, spinach, and ricotta cheese</p>
+  	</div>
+  }
+  ```
+
+  
+
+- The most basic (and wrong) way of using a component, is just by manually copying it several times, into the 
+
+  *App* .
+
+  ```typescript
+  import React from "react";
+  import ReactDOM from "react-dom/client";
+  
+  const App = () => {
+    return(
+        <div>
+            <h1>Hello React!</h1> 
+            <Pizza />
+            <Pizza />
+            <Pizza />
+        </div>
+    );
+  };
+  ```
+
+  
+
+  
 
