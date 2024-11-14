@@ -1,5 +1,3 @@
-//Codar L.36 - stopped at 05:30
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 
