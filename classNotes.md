@@ -188,7 +188,70 @@ root.render(
   };
   ```
 
-  
+  ### 37. What is JSX
 
+  ![image-20241113190643161](/home/joe/.var/app/io.typora.Typora/config/Typora/typora-user-images/image-20241113190643161.png)
   
+  
+  
+  - JSX is a declarative syntax to describre what components look like and how they work. 
+  - Every component must return one block of JSX, that React will use to render the compoent in the UI.
+  
+  ![image-20241113190754162](/home/joe/.var/app/io.typora.Typora/config/Typora/typora-user-images/image-20241113190754162.png)
+  
+  - JSX is an extension of JavaScript that allows us to embed JS, CSS and React components into HTML.
+  - JSX is declarative: it describes what the UI should look like using JSX, based on current data. JSX tells React **what** it should show on screen, and not **how** it should do it.
+
+### 38. Creating more components
+
+The components for the others structural elements from the page, will be created.
+
+```jsx
+//Header
+const Header = ()=> {
+    return <h1>Fast React Pizza Co. </h1>;
+}
+```
+
+```jsx
+//Menu
+const Menu = () => {
+    return (
+    	<div>
+            <h2>Our Menu</h2>
+            <Pizza />
+          	<Pizza />
+          	<Pizza />
+        </div>
+    )
+}
+```
+
+```jsx
+//Footer
+const Footer = () => {
+    return (
+    <footer>{new Date().toLocalTimeString()}. We're currently open</footer>)
+}
+```
+
+
+
+The *App* will be updated accordingly
+
+```jsx
+const App = () => {
+  return (
+    <div>
+          <Header />
+          <Menu />
+          <Footer />
+    </div>
+  );
+};
+```
+
+
+
+### 39. JavaScript logic in Comnponents
 
