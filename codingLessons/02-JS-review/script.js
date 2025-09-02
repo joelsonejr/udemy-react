@@ -143,10 +143,11 @@ function getBook(id) {
   return data.find((d) => d.id === id);
 }
 
+/*
 // Destructuring
 const books = getBooks();
 
-const myBook = getBook(1);
+const myBook = getBook(3);
 
 const { title, author, genres, pages, publicationDate, hasMovieAdaptation } =
   myBook;
@@ -204,4 +205,75 @@ const summary2 = `${title} is a book with ${pages} pages long, that was writter 
 )}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted as a movie.`;
 summary;
 
-//
+//Shortcircuiting and logical operators
+
+//and operator
+console.log(true && "some string");
+console.log(false && "some string");
+console.log(hasMovieAdaptation && `The book ${title} has a movie adaptation`);
+
+//truthy and falsy values. falsy: 0, '', null, undefined
+console.log("joe" && "somestring");
+console.log(0 && "somestring");
+
+//or operator
+console.log(true || "somestring");
+console.log(false || "somestring");
+
+const russianTranslation = myBook.translations.russian;
+russianTranslation;
+
+console.log(russianTranslation || "No translation available");
+
+// //nullish coalescing operator
+// const librarythingReviews = myBook.reviews.librarything.reviewsCount;
+// librarythingReviews;
+
+// const wrongCount = librarythingReviews || "no data";
+// wrongCount;
+
+// const count = librarythingReviews ?? "no data";
+// count;
+
+//Optional Chaining
+function getTotalReviewCount(book) {
+  const goodreadsReviews = book.reviews?.goodreads?.reviewsCount;
+  const librarythingReviews = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  return goodreadsReviews + librarythingReviews;
+}
+
+console.log(getTotalReviewCount(myBook));
+*/
+
+//The Array Map Method
+
+function getTotalReviewCount(book) {
+  const goodreadsReviews = book.reviews?.goodreads?.reviewsCount;
+  const librarythingReviews = book.reviews?.librarything?.reviewsCount ?? 0;
+
+  return goodreadsReviews + librarythingReviews;
+}
+
+const books = getBooks();
+
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+titles;
+
+// const essentialData = books.map((book) => {
+//   return {
+//     title: book.title,
+//     author: book.author,
+//   };
+// });
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewCount: getTotalReviewCount(book),
+}));
+
+essentialData;
