@@ -1,11 +1,15 @@
 # The Ultimate React Course (2025)
 
-```markdown
-Previous topic: Seção 4, capítulo 23: Pure React
-```
+## Previous topic
 
 ```markdown
-Next topic: Seção 4, capítulo 26: Pure React
+Seção 4, capítulo 26: Pure React
+```
+
+## Next topic
+
+```markdown
+Next topic: Seção 5, capítulo 33: Components, Props & JSX
 ```
 
 ## Section 5 : Working with Components, Props, and JSX
