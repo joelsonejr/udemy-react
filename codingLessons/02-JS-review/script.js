@@ -248,32 +248,110 @@ console.log(getTotalReviewCount(myBook));
 
 //The Array Map Method
 
-function getTotalReviewCount(book) {
-  const goodreadsReviews = book.reviews?.goodreads?.reviewsCount;
-  const librarythingReviews = book.reviews?.librarything?.reviewsCount ?? 0;
+// function getTotalReviewCount(book) {
+//   const goodreadsReviews = book.reviews?.goodreads?.reviewsCount;
+//   const librarythingReviews = book.reviews?.librarything?.reviewsCount ?? 0;
 
-  return goodreadsReviews + librarythingReviews;
-}
+//   return goodreadsReviews + librarythingReviews;
+// }
 
-const books = getBooks();
+// const books = getBooks();
 
-const x = [1, 2, 3, 4, 5].map((el) => el * 2);
-console.log(x);
+// const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+// console.log(x);
 
-const titles = books.map((book) => book.title);
-titles;
+// const titles = books.map((book) => book.title);
+// titles;
 
-// const essentialData = books.map((book) => {
-//   return {
-//     title: book.title,
-//     author: book.author,
-//   };
-// });
+// // const essentialData = books.map((book) => {
+// //   return {
+// //     title: book.title,
+// //     author: book.author,
+// //   };
+// // });
 
-const essentialData = books.map((book) => ({
-  title: book.title,
-  author: book.author,
-  reviewCount: getTotalReviewCount(book),
-}));
+// const essentialData = books.map((book) => ({
+//   title: book.title,
+//   author: book.author,
+//   reviewCount: getTotalReviewCount(book),
+// }));
 
-essentialData;
+// essentialData;
+
+// //Array Filter
+// const longBooks = books.filter((b) => b.pages >= 500);
+// longBooks;
+
+// const longBooksWithMovie = books
+//   .filter((b) => b.pages >= 500)
+//   .filter((b) => b.hasMovieAdaptation);
+// longBooksWithMovie;
+
+// const adventureBooks = books.filter((b) => b.genres.includes("adventure"));
+// adventureBooks;
+
+// const adventureBooks2 = books
+//   .filter((b) => b.genres.includes("adventure"))
+//   .map((b) => b.title);
+// adventureBooks2;
+
+// //Array Reduce Method
+// const pagesAllBooks = books.reduce((acc, b) => acc + b.pages, 0);
+// pagesAllBooks;
+
+// //Array Sort Method
+// const unsorted = [3, 7, 1, 9, 6];
+// const sorted = unsorted.sort((a, b) => a - b);
+// sorted;
+// unsorted;
+
+// const unsorted2 = [3, 7, 1, 9, 6];
+// const sorted2 = unsorted2.slice().sort((a, b) => a - b);
+// sorted2;
+// unsorted2;
+
+// const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+// sortedByPages;
+
+// const sortedByPages2 = books
+//   .slice()
+//   .sort((a, b) => b.pages - a.pages)
+//   .map((r) => ({ title: r.title, pages: r.pages }));
+// sortedByPages2;
+
+// //Working with immutable Arrays
+// // 1) Add book objetct to Array
+// const newBook = {
+//   id: 6,
+//   title: "The Hobbit",
+//   author: "J. R. R. Tolkien",
+// };
+
+// const afterAddBook = [...books, newBook];
+// afterAddBook;
+
+// //2) Delete a book object from Array
+// const booksAfterDelete = afterAddBook.filter((b) => b.id !== 3);
+// booksAfterDelete;
+
+// //3 Update book object in the array
+// const booksAfterUpdate = booksAfterDelete.map((b) =>
+//   b.id === 1 ? { ...b, pages: 1210 } : b
+// );
+// booksAfterUpdate;
+
+//Asynchronous JavaScript: Promises
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+//Asynchronous JavaScript: Async/Await
+const getTodos = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+
+  return data;
+};
+
+const todos = getTodos();
