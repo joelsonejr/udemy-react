@@ -3,13 +3,13 @@
 ## Previous topic
 
 ```markdown
-Seção 4, capítulo 26: Pure React
+Seção 4, capítulo 33: Pure React
 ```
 
 ## Next topic
 
 ```markdown
-Next topic: Seção 5, capítulo 33: Components, Props & JSX
+Seção 5, capítulo 37: Components, Props & JSX
 ```
 
 ## Section 5 : Working with Components, Props, and JSX
