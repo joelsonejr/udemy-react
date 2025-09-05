@@ -240,4 +240,189 @@ const App = () => {
 };
 ```
 
-### 39. JavaScript logic in Comnponents
+### 39. Styling React Applications
+
+In JSX there are several ways of applying style to a component. One of them is
+to use the inline style.
+
+```javascript
+const Header = () => {
+  return <h1 style={{ color: red }}>Fast React Pizza Co.</h1>;
+};
+```
+
+In JSX, in order to use the inline style it's necessary to pass the style
+information inside of a javascript object ( the inner {}). And, to use JS,
+is necessary to "enter in JS mode" (the outter {}). All the other style
+information will be placed inside of the JS object.
+
+```javascript
+const Header = () => {
+  return (
+    <h1 style={{ color: red, fontSize: "32px", textTransform: "uppercase" }}>
+      Fast React Pizza Co.
+    </h1>
+  );
+};
+```
+
+Since it is all in a JS object, the style could also be informed like this
+
+```javascript
+const Header = () => {
+  const style = { color: red, fontSize: "32px", textTransform: "uppercase" };
+
+  return <h1 style={style}>Fast React Pizza Co.</h1>;
+};
+```
+
+Another option is to use an external css file, define the style into classes,
+and use the classe names where necessary. We should not foget to import the
+CSS file, prior it's use.
+
+```javascript
+import "./index.css"; //just an example
+```
+
+### 42. Passing and receiveing Props
+
+```javascript
+const Menu = () => {
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+      {/*defining the props, and their value*/}
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato,
+      mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price="10"
+      />
+    </main>
+  );
+};
+
+const Pizza = (props) => {
+  //receiveing the props in the component
+  return (
+    <div>
+      <img src={props.photoName} alt={props.name} /> //using the props
+      <h3>{props.name}</h3>
+      <p>{props.ingredients}</p>
+    </div>
+  );
+};
+```
+
+The props values don't have to be defined on the same order every time
+
+```javascript
+<Pizza
+  name="Pizza Funghi"
+  ingredients="Tomato, mushrooms"
+  price="12"
+  photoName="pizzas/funghi.jpg"
+/>
+```
+
+### 43. Props, Immutability, and One-Way Data Flow
+
+We use props to move data from a parent component to a child component
+
+![Passing down props](./img/props01.png);
+
+Props are like arguments passed to a JS function. Single values, arrays,
+objects, functions and other components can be passed as props.
+
+![Props are read only](./img/props02.png);
+
+Props are read only. If you need to mutate props, it has to be done using State.
+
+Props are basically objects. And when you copy an object, and mutate a copy,
+the original object will also be changed, afecting the behaviour of the parent
+component, and/ or other child components.
+
+![Props have an one way data flow](./img/props03.png);
+
+It makes it easyer to predict the app behaviour, and debugg. Also, it's more
+performant than a two way data flow.
+
+### 44. CHALLENGE #1: Profile Card (v1)
+
+Minha solução
+
+```jsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
+
+function App() {
+  return (
+    <div className="card">
+      <Avatar />
+      <div className="data">
+        <Intro />
+        {/* Should contain one Skill component
+        for each web dev skill that you have,
+        customized with props */}
+        <SkillList />
+      </div>
+    </div>
+  );
+}
+
+const Avatar = () => {
+  return (
+    <img
+      className="avatar"
+      src="https://avatars.githubusercontent.com/u/53396470?v=4"
+      alt="Joelson"
+    />
+  );
+};
+
+const Intro = () => {
+  return (
+    <div>
+      <h1>Joelson Junior</h1>
+      <p>
+        Sou um profissional da área de TI, na qual atuo como desenvolvedor de
+        software. Graças a minhas experiências passadas pude desenvolver
+        competências que contribuem para minha área de atuação como por exemplo
+        gestão de equipes, capacidade de solução de problemas, team building e
+        capacidade de adaptação.
+      </p>
+    </div>
+  );
+};
+
+const SkillList = () => {
+  return (
+    <div className="skill-list">
+      <Skill skill="Ux" emoji="👶" color="blue" />
+      <Skill skill="React" emoji="👶" color="orangered" />
+      <Skill skill="C#" emoji="👶" color="purple" />
+      <Skill skill="SQL" emoji="👶" color="gray" />
+    </div>
+  );
+};
+
+const Skill = (props) => {
+  return (
+    <div className="skill" style={{ backgroundColor: props.color }}>
+      <span>{props.skill}</span>
+      <span>{props.emoji}</span>
+    </div>
+  );
+};
+
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
