@@ -1,17 +1,5 @@
 # The Ultimate React Course (2025)
 
-## Previous topic
-
-```markdown
-Seção 4, capítulo 33: Pure React
-```
-
-## Next topic
-
-```markdown
-Seção 5, capítulo 37: Components, Props & JSX
-```
-
 ## Section 5 : Working with Components, Props, and JSX
 
 ### 33. Rendering the Root Component and Strict Mode
@@ -37,9 +25,9 @@ root.render(<App />);
 
 - A seguir, tem o componente App, dentro do qual será inserido o código da aplicação. O nome não precisa ser esse, mas o componente deve ser iniciado por letra maiúscula.
 
-- É criada a variável root, a qual recebe a div de id _root_ que está em _./public/index.html_. Será dentro dessa div que o React irá renderizar a aplicação.
+- É criada a variável root, a qual recebe a div de id *root* que está em *./public/index.html*. Será dentro dessa div que o React irá renderizar a aplicação.
 
-- Posteriormente, é utilizado o método _render_ , para renderizar a aplicação.
+- Posteriormente, é utilizado o método *render* , para renderizar a aplicação.
 
 - Essa é a forma de renderizar a aplicação para o React 18+.
 
@@ -58,9 +46,9 @@ const App = () => {
 React.render(<App />, document.getElementById("root"));
 ```
 
-- Ao invés de renderizar o _App_ como um root component, pode-se utilizar o _strict mode_ , simplesmente envolvendo o _App_ em um _strict mode component_. Dessa forma, durante o desenvolvimento, o _strict mode_ renderizará o componente duas vezes, a fim de verificar se existem bugs, e verificar se estão utilizadas versões ultrapassadas da
+- Ao invés de renderizar o *App* como um root component, pode-se utilizar o *strict mode* , simplesmente envolvendo o *App* em um *strict mode component*. Dessa forma, durante o desenvolvimento, o *strict mode* renderizará o componente duas vezes, a fim de verificar se existem bugs, e verificar se estão utilizadas versões ultrapassadas da
 
-  _React API_ .
+  *React API* .
 
 ```js
 // Arquivo ./src/index.js
@@ -123,9 +111,9 @@ root.render(
   );
   ```
 
-- Each component can only return one element. So, in order to avoid an error, the return of the App component shoul de encapsulated inside of a _div_ .
+- Each component can only return one element. So, in order to avoid an error, the return of the App component shoul de encapsulated inside of a *div* .
 
-- Once the _Pizza_ component is nested inside _App_ it will be presented on the screen. Pizza is nested inside of App.
+- Once the *Pizza* component is nested inside *App* it will be presented on the screen. Pizza is nested inside of App.
 
 - What should be nested is the component, and not it's declaration.
 
@@ -152,17 +140,15 @@ root.render(
 
   ```typescript
   function Pizza() {
-  	return <div>
-  		<img src="pizzas/spinaci.jpg" alt="Pizza spinaci />
-  		<h2>Pizza Spinachi</h2>
-  		<p>Tomato, mozarella, spinach, and ricotta cheese</p>
-  	</div>
+   return <div>
+    <img src="pizzas/spinaci.jpg" alt="Pizza spinaci />
+    <h2>Pizza Spinachi</h2>
+    <p>Tomato, mozarella, spinach, and ricotta cheese</p>
+   </div>
   }
   ```
 
-- The most basic (and wrong) way of using a component, is just by manually copying it several times, into the
-
-  _App_ .
+- The most basic (and wrong) way of using a component, is just by manually copying it several times, into the *App*.
 
   ```typescript
   import React from "react";
@@ -226,7 +212,7 @@ const Footer = () => {
 };
 ```
 
-The _App_ will be updated accordingly
+The *App* will be updated accordingly
 
 ```jsx
 const App = () => {
@@ -337,7 +323,7 @@ objects, functions and other components can be passed as props.
 
 ![Props are read only](./img/props02.png);
 
-Props are read only. If you need to mutate props, it has to be done using State.
+Props are read only. If you need to mutate props, it has to be done using State.a
 
 Props are basically objects. And when you copy an object, and mutate a copy,
 the original object will also be changed, afecting the behaviour of the parent
@@ -426,3 +412,138 @@ root.render(
   </StrictMode>
 );
 ```
+
+---
+
+### 45. The Rules of JSX
+
+#### General Rules
+
+- Essentialy works like HTML, but we can enter *JavaScript mode* by using {}
+- We can place JavaScript expressions inside the {}. Examples: reference
+  variables, create arrays or objects, [].map, ternary operator, etc.
+- Statements are **not allowed** (if/ else, for, switch);
+- JSX produces a JavaScript expression.
+
+  ```javascript
+  const el = <h1>Hello React!</h1>
+
+  <!-- generates -->
+
+  const el = React.createElement("h1", null, "Hello React!" );
+  ```
+
+- Because of that, we can:
+  - place other pieces of JSX inside of the {}
+  - write JSX anywhere inside a component ( in if/else, assign to variables,
+    pass it to functions).
+- A piece of JSX can have **one root element**. If you need more use
+  <React.Fragment> (or the short <>
+
+---
+
+### 46. Rendering Lists)
+
+In order to render list in React, we use the *map* method. With it we can go
+over the data, and create a component to each one of them.
+
+Right now, in order to render all the pizzas, we have to write one component
+for each of the pizza items inside of the pizzaData array, and manually fill
+the props for each one.
+
+```jsx
+const Menu = () => {
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+      {/*defining the props, and their value*/}
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato,
+      mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price="10"
+      />
+    </main>
+  );
+};
+
+const Pizza = (props) => {
+  //receiveing the props in the component
+  return (
+    <div>
+      <img src={props.photoName} alt={props.name} /> //using the props
+      <h3>{props.name}</h3>
+      <p>{props.ingredients}</p>
+    </div>
+  );
+};
+```
+
+Using the map method, we ca iterate over the array, and generate (return) one
+pizza component for each item of the array.
+
+```jsx
+<div>
+  {pizzaData.map((pizza) => (
+    <Pizza pizzaObject={pizza} key={pizza.name} />
+  ))}
+</div>
+```
+
+We pass the object to the component as a prop, and from inside the component,
+retrieve the necessary data.
+
+```jsx
+const Pizza = (props) => {
+  return (
+    <div>
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
+      <div>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price}</span>
+      </div>
+    </div>
+  );
+};
+```
+
+As we are rendering a list, the div names should be changed, in order to be
+semantically accurate. The final code will look like this:
+
+```jsx
+const Menu = () => {
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObject={pizza} key={pizza.name} />
+        ))}
+      </ul>
+    </main>
+  );
+};
+
+const Pizza = (props) => {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
+      <div>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price}</span>
+      </div>
+    </li>
+  );
+};
+```
+
+**Note** : we should use .map, instead of forEach. The reason it that we need to
+have *JSX* inside of the ul. Map returns a new array (JSX element).
+
+---
+
+### 47 Conditional Rendering with &&
