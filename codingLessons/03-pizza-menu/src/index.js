@@ -66,15 +66,28 @@ const Header = () => {
 };
 
 const Menu = () => {
+  const pizzas = pizzaData;
+  const havePizzas = pizzas.length > 0;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObject={pizza} key={pizza.name} />
-        ))}
-      </ul>
+      {havePizzas ? (
+        <>
+          <p>
+            Authentic Italian cusine. 6 creative dishes to choose from. All from
+            our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObject={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu. Please come back later.</p>
+      )}
 
       {/* <Pizza
         name="Pizza Spinaci"
@@ -93,14 +106,16 @@ const Menu = () => {
   );
 };
 
-const Pizza = (props) => {
+const Pizza = ({ pizzaObject }) => {
+  // if (pizzaObject.soldOut) return null;
+
   return (
-    <li className="pizza">
-      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
+    <li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
       <div>
-        <h3>{props.pizzaObject.name}</h3>
-        <p>{props.pizzaObject.ingredients}</p>
-        <span>{props.pizzaObject.price}</span>
+        <h3>{pizzaObject.name}</h3>
+        <p>{pizzaObject.ingredients}</p>
+        <span>{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price}</span>
       </div>
     </li>
   );
@@ -116,8 +131,26 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We're currently open
+      {isOpen ? (
+        <Order openHour={openHour} closeHour={closeHour} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
     </footer>
+  );
+};
+
+const Order = ({ openHour, closeHour }) => {
+  return (
+    <div className="order">
+      <p>
+        We're open from {openHour}:00 until {closeHour}:00. Come visit us, or
+        order online
+      </p>
+      <buttton className="btn">Order</buttton>
+    </div>
   );
 };
 

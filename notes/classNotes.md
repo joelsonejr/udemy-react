@@ -547,3 +547,179 @@ have *JSX* inside of the ul. Map returns a new array (JSX element).
 ---
 
 ### 47 Conditional Rendering with &&
+
+```jsx
+const Menu = () => {
+  const pizzas = pizzaData;
+  const havePizzas = pizzaData.length > 0;
+
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+      {havePizzas && (
+        <ul className="pizzas">
+          {pizzas.map((pizza) => (
+            <Pizza pizzaObject={pizza} key={pizza.name} />
+          ))}
+        </ul>
+      )}
+```
+
+### 48 Conditional Rendering with Ternaries
+
+```jsx
+  const Footer = () => {
+  const hour = new Date().getHours();
+  const openHour = 10;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+
+  return (
+    <footer className="footer">
+      {isOpen ? (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Come visit us, or order online</p>
+          <buttton className="btn">Order</buttton>
+        </div>
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 to {closeHour}:00.
+        </p>
+      )}
+    </footer>
+  );
+};
+```
+
+### 49 Conditional Rendering with Multiple Returns
+
+```jsx
+const Pizza = (props) => {
+  if (props.pizzaObject.soldOut) return null;
+
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObject.photoName} alt={props.pizzaObject.name} />
+      <div>
+        <h3>{props.pizzaObject.name}</h3>
+        <p>{props.pizzaObject.ingredients}</p>
+        <span>{props.pizzaObject.price}</span>
+      </div>
+    </li>
+  );
+};
+```
+
+### 50. Extracting JSX into a new Component
+
+Spliting the Footer component in two separate components, Order and Footer.
+
+```jsx
+const Footer = () => {
+  const hour = new Date().getHours();
+
+  const businessHours = {
+    open: 10,
+    close: 13,
+  };
+
+  const isOpen = hour >= businessHours.open && hour <= businessHours.close;
+return (
+    <footer className="footer">
+      {isOpen ? (
+        <Order hours={businessHours} />
+      ) : (
+        <p>
+          We're happy to welcome you between {businessHours.open}:00 and{" "}
+          {businessHours.close}:00.
+        </p>
+      )}
+    </footer>
+  );
+};
+
+const Order = (props) => {
+  return (
+    <div className="order">
+      <p>
+        We're open until {props.hours.close}:00. Come visit us, or order online
+      </p>
+      <buttton className="btn">Order</buttton>
+    </div>
+  );
+};
+
+```
+
+### 51. Destructuring Props
+
+Using destructuring it's easyer to access the values that are passed using props.
+The variable used in the destructuring of the props should have the same name of
+the props being passed from the parent component.
+
+```jsx
+
+```
+
+### 52. React Fragments
+
+React Fragment allow us to group elements, without leaving any trace on the 
+HTML tree (in the DOM).
+
+```jsx
+  return (
+    <main className="menu">
+      <h2>Our Menu</h2>
+
+      {havePizzas ? (
+        <>
+          <p>
+            Authentic Italian cusine. 6 creative dishes to choose from. All from
+            our stone oven, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObject={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We're still working on our menu. Please come back later.</p>
+      )}
+```
+
+There are two ways of representin a React Fragment
+
+```jsx
+  <> </>
+
+  <React.Fragment></React.Fragment>
+```
+
+The second way of doing it is usefeul when, for example, we're rendering a list, 
+and have the nedd to put a key to it.
+
+```jsx
+  <React.Fragment key={'my-sample-key'}>
+  'some-code-here'
+  </React.Fragment>
+```
+
+### 53. Setting Classes and Text Conditionally
+
+```jsx
+  const Pizza = ({ pizzaObject }) => {
+  // if (pizzaObject.soldOut) return null;
+
+  return (
+    <li className={`pizza ${pizzaObject.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObject.photoName} alt={pizzaObject.name} />
+      <div>
+        <h3>{pizzaObject.name}</h3>
+        <p>{pizzaObject.ingredients}</p>
+        <span>{pizzaObject.soldOut ? "SOLD OUT" : pizzaObject.price}</span>
+      </div>
+    </li>
+  );
+};
+```
