@@ -728,4 +728,89 @@ and have the nedd to put a key to it.
 
 ![ComponentTree](./img/component-tree.png)
 
-### 57. 
+### 57. Let's build a Steps Component
+
+### 58. Handling Events the React Way
+
+We specify a event listener function directly on the element were it will happen
+
+```jsx
+<div className="buttons">
+    <div>
+      <button
+        style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+        onClick={() => alert("Previous")}
+      >
+        Previous
+      </button>
+    </div>
+    <div>
+      <button
+        style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+        onClick={() => alert("Next")}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+```
+
+Event handler functions are written **right inside** the component
+
+```jsx
+export default function App() {
+  const step = 3;
+
+  const handlePrevious = () => {
+    alert("Previous");
+  };
+
+  const handleNext = () => {
+    alert("Next");
+  };
+
+  //The handlers are passed to the onClic, of each button.
+  <div className="buttons">
+        <div>
+          <button
+            style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+            onClick={handlePrevious}
+          >
+            Previous
+          </button>
+        </div>
+        <div>
+          <button
+            style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+```
+
+### 59. What is State in React
+
+![State](./img/state.png)
+
+- State is data that a component can hold over time. Necessary for information
+that needs to be remenbered throughout the app's lifecycle.
+- "Components' memory"
+- **"State variable" / "piece of state"**: A single variable in a component
+  (component state)
+- State refers to the entire state that the component is in (the entire
+  condition on a certain point in time). The term *State* refers to all the
+  *pieces of state* toghether.
+- Updating **component state** triggers *React* to **re-render the component**
+- When a single component is rendered, we call it a view. All the views combined
+  together make the final *User Interface*
+
+![State](./img/state-02.png)
+
+- State is how *React* keeps data in sync with the UI
+- State allow developers to:
+  - Update the components view(by re-rendering it)
+  - Persist local variables between renders
+
