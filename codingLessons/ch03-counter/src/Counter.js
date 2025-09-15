@@ -57,26 +57,31 @@ const Counter = () => {
     });
 
     const dateSentence = (counter) => {
-      let sentence = "noData";
+      let sentence = "invalidData";
 
-      if (counter === 0) {
-        sentence = `Today is `;
-      }
+      switch (true) {
+        case counter === 0:
+          sentence = `Today is `;
+          break;
 
-      if (counter === 1) {
-        sentence = `${counter} day from today is `;
-      }
+        case counter === 1:
+          sentence = `${counter} day from today is `;
+          break;
 
-      if (counter > 1) {
-        sentence = `${counter} days from today is `;
-      }
+        case counter > 1:
+          sentence = `${counter} days from today is `;
+          break;
 
-      if (counter === -1) {
-        sentence = `${counter} day ago was `;
-      }
+        case counter === -1:
+          sentence = `${Math.abs(counter)} day ago was `;
+          break;
 
-      if (counter < -1) {
-        sentence = `${counter} days ago was `;
+        case counter < -1:
+          sentence = `${Math.abs(counter)} days ago was `;
+          break;
+
+        default:
+          break;
       }
 
       return sentence;
