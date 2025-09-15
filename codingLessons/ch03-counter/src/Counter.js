@@ -8,26 +8,19 @@ const Counter = () => {
 
   const currentDate = DateTime.local().plus({ day: counter });
 
-  const CounterField = ({ fieldName, fieldValue }) => {
+  const CounterField = ({
+    fieldName,
+    fieldValue,
+    addHandler,
+    removeHandler,
+  }) => {
     return (
       <div>
-        <button onClick={handleRemoveCount}>-</button>
+        <button onClick={removeHandler}>-</button>
         <span style={{ fontSize: "30px" }}>
           {fieldName}: {fieldValue}
         </span>
-        <button onClick={handleAddCount}>+</button>
-      </div>
-    );
-  };
-
-  const StepsField = ({ fieldName, fieldValue }) => {
-    return (
-      <div>
-        <button onClick={handleRemoveSteps}>-</button>
-        <span style={{ fontSize: "30px" }}>
-          {fieldName}: {fieldValue}
-        </span>
-        <button onClick={handleAddSteps}>+</button>
+        <button onClick={addHandler}>+</button>
       </div>
     );
   };
@@ -74,8 +67,18 @@ const Counter = () => {
   return (
     <>
       <div className="counter">
-        <StepsField fieldName="Steps" fieldValue={steps} />
-        <CounterField fieldName="Count" fieldValue={counter} />
+        <CounterField
+          fieldName="Steps"
+          fieldValue={steps}
+          addHandler={handleAddSteps}
+          removeHandler={handleRemoveSteps}
+        />
+        <CounterField
+          fieldName="Count"
+          fieldValue={counter}
+          addHandler={handleAddCount}
+          removeHandler={handleRemoveCount}
+        />
       </div>
       <div className="displayDate" style={{ marginTop: "30px" }}>
         <DisplayDate />
