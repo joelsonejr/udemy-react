@@ -49,16 +49,18 @@ const Counter = () => {
   };
 
   const DisplayDate = () => {
+    const formatedDate = currentDate.toLocaleString({
+      weekday: "short",
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    });
+
     return (
       <div>
         <span>
           {counter === 0 ? "Today" : `${counter} day(s) from today `} is{" "}
-          {`${currentDate.toLocaleString({
-            weekday: "short",
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          })}`}
+          {`${formatedDate}`}
         </span>
       </div>
     );
