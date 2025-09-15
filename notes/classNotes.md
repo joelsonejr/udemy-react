@@ -791,6 +791,8 @@ export default function App() {
 
 ```
 
+---
+
 ### 59. What is State in React
 
 ![State](./img/state.png)
@@ -814,3 +816,286 @@ that needs to be remenbered throughout the app's lifecycle.
   - Update the components view(by re-rendering it)
   - Persist local variables between renders
 
+---
+
+### 60. Creating a State Variable With useState
+
+To utilize *State* in *React* we follow 3 basic steps:
+
+- We add a new state variable
+- We use it in the code (usually in JSX)
+- We update the piece of state in some event handler
+
+```jsx
+import {useState} from React;
+
+const arr = useState(1);
+```
+
+*useState* returns an array, with two values. The first is the default value of
+that state. The second is a function that we can use to update our state
+variable.
+
+Usually, we should destruct the return of the useState. Doing so, we concluded
+the first two steps necessary to use state.
+
+```jsx
+import { useState } from "react";
+
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
+
+export default function App() {
+  //implementing State variable
+  const [step, setStep] = useState(1);
+
+  const handlePrevious = () => {
+    alert("Previous");
+  };
+
+  const handleNext = () => {
+    alert("Next");
+  };
+
+  return (
+    <div className="steps">
+      <div className="numbers">
+      {/* using the State variable */}
+        <div className={`${step >= 1 ? "active" : ""}`}>1</div>
+        <div className={`${step >= 2 ? "active" : ""}`}>2</div>
+        <div className={`${step >= 3 ? "active" : ""}`}>3</div>
+      </div>
+```
+
+The next step is to update the state variable, using a handler.
+
+```jsx
+import { useState } from "react";
+
+const messages = [
+  "Learn React ⚛️",
+  "Apply for jobs 💼",
+  "Invest your new income 🤑",
+];
+
+export default function App() {
+  const [step, setStep] = useState(1);
+
+  const handlePrevious = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
+  const handleNext = () => {
+    if (step < 3) setStep(step + 1);
+  };
+
+  return (
+    <div className="steps">
+      <div className="numbers">
+        <div className={step >= 1 ? "active" : ""}>1</div>
+        <div className={step >= 2 ? "active" : ""}>2</div>
+        <div className={step >= 3 ? "active" : ""}>3</div>
+      </div>
+      <p className="message">
+        Step {step}: {messages[step - 1]}
+      </p>
+      <div className="buttons">
+        <div>
+          <button
+            style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+            onClick={handlePrevious}
+          >
+            Previous
+          </button>
+        </div>
+        <div>
+          <button
+            style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+            onClick={handleNext}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+- *useState* is a *React Hook*. All *React* functions that start with *use* are
+hooks.
+- Hooks can only be used on the top level of a function. Not inside an *if*
+statment, functions, loops, etc.
+- State should always be updated using the *update function*, and not manually.
+
+---
+
+### 61. Don't Set State Manually
+
+```jsx
+export default function App() {
+  let [step, setStep] = useState(1);
+  let [step, setStep] = useState(1);
+
+  const handlePrevious = () => {
+    // if (step > 1) setStep(step - 1);
+    step = step +1;
+  };
+```
+
+If we try to update a state variable manually, *React* won't have a way of
+knowing that we're trying to update the state variable. Because of that, noting 
+happens.
+
+- Always consider *state* in *React* as something immutable, and that can only
+  be changed using the tolls provided by the framework.
+
+---
+
+### 62. The Mechanics of State
+
+![State Mechanics](./img/state-mechanics.png)
+
+---
+
+### 63. Adding Another Piece of State
+
+```jsx
+const handleIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <>
+      <button className="close" onClick={handleIsOpen}>
+        &times;
+      </button>
+      {isOpen && (
+        <div className="steps">
+          <div className="numbers">
+            <div className={step >= 1 ? "active" : ""}>1</div>
+            <div className={step >= 2 ? "active" : ""}>2</div>
+            <div className={step >= 3 ? "active" : ""}>3</div>
+          </div>
+          <p className="message">
+            Step {step}: {messages[step - 1]}
+          </p>
+          <div className="buttons">
+            <div>
+              <button
+                style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+                onClick={handlePrevious}
+              >
+                Previous
+              </button>
+            </div>
+            <div>
+              <button
+                style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+  ```
+
+---
+
+### 64. React Developer Tools
+
+Allow us to inspect the component tree,  and manipulate components, (and it's states and props),
+directly from the browser console.
+
+---
+
+### 65. Updating State Based on Current State
+
+Update state, based on current state, in the way we're doing it it's fine, but 
+it's a fagrile solution.
+
+```jsx
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    if (step < 3) setStep(step + 1);
+  };
+```
+
+If we decide to increase two steps at a time, doing this:
+
+
+```jsx
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    if (step < 3) {
+      setStep(step + 1);
+      setStep(step + 1);
+    };
+  };
+```
+
+It won't work. It will increase the steps by one.
+The correct way of doing it, is to pass a callback function to the set function,
+and provide to it the current value of the state.
+
+```jsx
+  const [step, setStep] = useState(1);
+
+  const handleNext = () => {
+    if (step < 3) {
+      setStep((s) => s + 1);
+      setStep((s) => s + 1);
+    };
+  };
+```
+
+Even if we're doing it only once, the safer way is to use the callback function,
+when we're updating state, based on the current state.
+
+```jsx
+const handlePrevious = () => {
+    if (step > 1) setStep((s) => s - 1);
+  };
+
+  const handleNext = () => {
+    if (step < 3) setStep((s) => s + 1);
+  };
+
+  const handleIsOpen = () => {
+    setIsOpen((is) => !is);
+  };
+
+```
+
+There's no need for the callback, if we're not updating a state based on the
+current state value.
+
+---
+
+### 66. More Thoughts About State + State Guidelines
+
+![More about State](./img/more-about-states-01.png)
+
+![More about State](./img/more-about-states-02.png)
+
+- The UI is a representation of all the states, in all components. It's is
+  basically a function of State
+- A React application is about changing state over time, and displaying in
+  correctly all the time.
+
+#### Practical Guidelines about State
+
+![State GuideLines](./img/state-guidelines.png)
+
+---
+
+### 
