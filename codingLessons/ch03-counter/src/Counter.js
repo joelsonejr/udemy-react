@@ -56,11 +56,36 @@ const Counter = () => {
       year: "numeric",
     });
 
+    const dateSentence = (counter) => {
+      let sentence = "noData";
+
+      if (counter === 0) {
+        sentence = `Today is `;
+      }
+
+      if (counter === 1) {
+        sentence = `${counter} day from today is `;
+      }
+
+      if (counter > 1) {
+        sentence = `${counter} days from today is `;
+      }
+
+      if (counter === -1) {
+        sentence = `${counter} day ago was `;
+      }
+
+      if (counter < -1) {
+        sentence = `${counter} days ago was `;
+      }
+
+      return sentence;
+    };
+
     return (
       <div>
         <span>
-          {counter === 0 ? "Today" : `${counter} day(s) from today `} is{" "}
-          {`${formatedDate}`}
+          {`${dateSentence(counter)}`} {`${formatedDate}`}
         </span>
       </div>
     );
