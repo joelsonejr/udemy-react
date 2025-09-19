@@ -2,6 +2,8 @@
 
 ## Section 5 : Working with Components, Props, and JSX
 
+---
+
 ### 33. Rendering the Root Component and Strict Mode
 
 ```js
@@ -69,6 +71,10 @@ root.render(
 );
 ```
 
+---
+
+---
+
 ### 35 . Components as Building Blocks
 
 - React applications are entirely made out of components.
@@ -78,6 +84,10 @@ root.render(
 - Each componente has it's own data, logic and appearence.
 
 - Components can be reused, and nested inside other components.
+
+---
+
+---
 
 ### 36. Creating and Reusing a Component
 
@@ -178,6 +188,10 @@ root.render(
   - JSX is an extension of JavaScript that allows us to embed JS, CSS and React components into HTML.
   - JSX is declarative: it describes what the UI should look like using JSX, based on current data. JSX tells React **what** it should show on screen, and not **how** it should do it.
 
+---
+
+---
+
 ### 38. Creating more components
 
 The components for the others structural elements from the page, will be created.
@@ -226,6 +240,10 @@ const App = () => {
 };
 ```
 
+---
+
+---
+
 ### 39. Styling React Applications
 
 In JSX there are several ways of applying style to a component. One of them is
@@ -270,6 +288,10 @@ CSS file, prior it's use.
 import "./index.css"; //just an example
 ```
 
+---
+
+---
+
 ### 42. Passing and receiveing Props
 
 ```javascript
@@ -312,6 +334,10 @@ The props values don't have to be defined on the same order every time
 />
 ```
 
+---
+
+---
+
 ### 43. Props, Immutability, and One-Way Data Flow
 
 We use props to move data from a parent component to a child component
@@ -333,6 +359,10 @@ component, and/ or other child components.
 
 It makes it easyer to predict the app behaviour, and debugg. Also, it's more
 performant than a two way data flow.
+
+---
+
+---
 
 ### 44. CHALLENGE #1: Profile Card (v1)
 
@@ -417,6 +447,8 @@ root.render(
 
 ### 45. The Rules of JSX
 
+---
+
 #### General Rules
 
 - Essentialy works like HTML, but we can enter *JavaScript mode* by using {}
@@ -439,6 +471,8 @@ root.render(
     pass it to functions).
 - A piece of JSX can have **one root element**. If you need more use
   <React.Fragment> (or the short <>
+
+---
 
 ---
 
@@ -546,6 +580,8 @@ have *JSX* inside of the ul. Map returns a new array (JSX element).
 
 ---
 
+---
+
 ### 47 Conditional Rendering with &&
 
 ```jsx
@@ -564,6 +600,8 @@ const Menu = () => {
         </ul>
       )}
 ```
+
+---
 
 ### 48 Conditional Rendering with Ternaries
 
@@ -591,6 +629,8 @@ const Menu = () => {
 };
 ```
 
+---
+
 ### 49 Conditional Rendering with Multiple Returns
 
 ```jsx
@@ -609,6 +649,8 @@ const Pizza = (props) => {
   );
 };
 ```
+
+---
 
 ### 50. Extracting JSX into a new Component
 
@@ -651,6 +693,8 @@ const Order = (props) => {
 
 ```
 
+---
+
 ### 51. Destructuring Props
 
 Using destructuring it's easyer to access the values that are passed using props.
@@ -661,9 +705,11 @@ the props being passed from the parent component.
 
 ```
 
+---
+
 ### 52. React Fragments
 
-React Fragment allow us to group elements, without leaving any trace on the 
+React Fragment allow us to group elements, without leaving any trace on the
 HTML tree (in the DOM).
 
 ```jsx
@@ -696,7 +742,7 @@ There are two ways of representin a React Fragment
   <React.Fragment></React.Fragment>
 ```
 
-The second way of doing it is usefeul when, for example, we're rendering a list, 
+The second way of doing it is usefeul when, for example, we're rendering a list,
 and have the nedd to put a key to it.
 
 ```jsx
@@ -704,6 +750,8 @@ and have the nedd to put a key to it.
   'some-code-here'
   </React.Fragment>
 ```
+
+---
 
 ### 53. Setting Classes and Text Conditionally
 
@@ -724,11 +772,17 @@ and have the nedd to put a key to it.
 };
 ```
 
+---
+
 ### 54. Section Summary
 
 ![ComponentTree](./img/component-tree.png)
 
+---
+
 ### 57. Let's build a Steps Component
+
+---
 
 ### 58. Handling Events the React Way
 
@@ -947,7 +1001,7 @@ export default function App() {
 ```
 
 If we try to update a state variable manually, *React* won't have a way of
-knowing that we're trying to update the state variable. Because of that, noting 
+knowing that we're trying to update the state variable. Because of that, noting
 happens.
 
 - Always consider *state* in *React* as something immutable, and that can only
@@ -1018,7 +1072,7 @@ directly from the browser console.
 
 ### 65. Updating State Based on Current State
 
-Update state, based on current state, in the way we're doing it it's fine, but 
+Update state, based on current state, in the way we're doing it it's fine, but
 it's a fagrile solution.
 
 ```jsx
@@ -1030,7 +1084,6 @@ it's a fagrile solution.
 ```
 
 If we decide to increase two steps at a time, doing this:
-
 
 ```jsx
   const [step, setStep] = useState(1);
@@ -1098,6 +1151,171 @@ current state value.
 
 ---
 
-### 69. Starting a New Project: The "Far Away" Travel List
+### 72. Building a Form and Handling Submissions
 
+To use a *Form* in *React* we use the regular *HTML* form
 
+```jsx
+  return (
+    <form className="add-form">
+      <h3>What do you need for your 😍 trip?</h3>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" placeholder="Item..." />
+      <button>Add</button>
+    </form>
+  );
+};
+```
+
+The following piece of code is using an *Array* method, in order to
+create a list of values, that will be passed on to the *map*, so it
+can create an opton entry to each of the number in the *Array*
+
+```jsx
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" 
+```
+
+To handle the form submission, we use a function handler, that shoul be
+related to the form submit event it self, and not to the submission button.
+
+```jsx
+const Form = () => {
+  const handleSubmit = () => {
+   
+  };
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your 😍 trip?</h3>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" placeholder="Item..." />
+      <button>Add</button>
+    </form>
+  );
+};
+```
+
+When we submit a form, the default HTML behaviour is to reload the page. In
+order to keep the SPA flow, we don't want that to happen. So, we have to
+pass the submit event to the handler, in order to prevent the default
+behaviour. When the *submit* happens, React will pass the event to the
+*onSubmit*  property (to the method that we wrote inside it). That event is an object with all the information of
+the current event
+
+```jsx
+const Form = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your 😍 trip?</h3>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input type="text" placeholder="Item..." />
+      <button>Add</button>
+    </form>
+  );
+};
+```
+
+---
+
+### 73. Controlled Elements
+
+By default, the input elements maintain their own state inside the *DOM* (the HTML element itself). In *Reacrt* we like to
+keep the *state* all in one place, wich is inside the application, and not inside the *DOM*. In order to do that, we use
+a technique calle *controlled elements*. Doing so, is *React* that controls and own the state of the input field.
+
+In order to use the controlled element technique, we follow 3 steps:
+
+- First, we create a state.
+- Second, we use that value.
+- Third, connect the state with the value that will be typed on the input.
+
+```jsx
+const Form = () => {
+  const [description, setDescription] = useState(""); //defining the state
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your 😍 trip?</h3>
+      <select>
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description} //using the state value
+        onChange={(e) => setDescription(e.target.value)} //connectig the inpute value with the state
+      />
+```
+
+Controlling both inputs
+
+```jsx
+const Form = () => {
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(1);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your 😍 trip?</h3>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <button>Add</button>
+    </form>
+  );
+};
+```
