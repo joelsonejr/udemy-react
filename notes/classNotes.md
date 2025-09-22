@@ -1319,3 +1319,23 @@ const Form = () => {
   );
 };
 ```
+
+---
+
+### 74. State vs. Props
+
+| State | Props |
+|:----: |:----: |
+|Internal data, owned by component | External data, owned by the parent component|
+|Component memory | Similar to function parameters |
+|Can be update by the component itself | Read only |
+|Updating State causes re-render | Receiveing new props, causes re-render. <br> Usually when the parent *State* is updated |
+|Used to make components interactive | Used by parent component to configure child <br> component |
+
+---
+
+### 75. EXERCISE #1: Flashcards
+
+---
+
+### 76. CHALLENGE #2: Date Counter (v2)
