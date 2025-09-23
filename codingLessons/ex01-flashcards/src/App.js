@@ -58,7 +58,6 @@ const FlashCards = () => {
   const Card = ({ content }) => {
     return (
       <div
-        key={content.id}
         className={content.id === selectedId ? "selected" : ""}
         onClick={() => handleClick(content.id)}
       >

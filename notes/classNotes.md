@@ -4,7 +4,7 @@
 
 ---
 
-### 33. Rendering the Root Component and Strict Mode
+## 33. Rendering the Root Component and Strict Mode
 
 ```js
 // Arquivo ./src/index.js
@@ -75,7 +75,7 @@ root.render(
 
 ---
 
-### 35 . Components as Building Blocks
+## 35 . Components as Building Blocks
 
 - React applications are entirely made out of components.
 
@@ -89,7 +89,7 @@ root.render(
 
 ---
 
-### 36. Creating and Reusing a Component
+## 36. Creating and Reusing a Component
 
 - In React, we create components using functions.
 
@@ -176,7 +176,7 @@ root.render(
   };
   ```
 
-  ### 37. What is JSX
+  ## 37. What is JSX
 
   ![image-20241113190643161](./img/image-20241113190643161.png)
 
@@ -192,7 +192,7 @@ root.render(
 
 ---
 
-### 38. Creating more components
+## 38. Creating more components
 
 The components for the others structural elements from the page, will be created.
 
@@ -244,7 +244,7 @@ const App = () => {
 
 ---
 
-### 39. Styling React Applications
+## 39. Styling React Applications
 
 In JSX there are several ways of applying style to a component. One of them is
 to use the inline style.
@@ -292,7 +292,7 @@ import "./index.css"; //just an example
 
 ---
 
-### 42. Passing and receiveing Props
+## 42. Passing and receiveing Props
 
 ```javascript
 const Menu = () => {
@@ -338,7 +338,7 @@ The props values don't have to be defined on the same order every time
 
 ---
 
-### 43. Props, Immutability, and One-Way Data Flow
+## 43. Props, Immutability, and One-Way Data Flow
 
 We use props to move data from a parent component to a child component
 
@@ -364,7 +364,7 @@ performant than a two way data flow.
 
 ---
 
-### 44. CHALLENGE #1: Profile Card (v1)
+## 44. CHALLENGE #1: Profile Card (v1)
 
 Minha solução
 
@@ -445,11 +445,11 @@ root.render(
 
 ---
 
-### 45. The Rules of JSX
+## 45. The Rules of JSX
 
 ---
 
-#### General Rules
+### General Rules
 
 - Essentialy works like HTML, but we can enter *JavaScript mode* by using {}
 - We can place JavaScript expressions inside the {}. Examples: reference
@@ -476,7 +476,7 @@ root.render(
 
 ---
 
-### 46. Rendering Lists)
+## 46. Rendering Lists)
 
 In order to render list in React, we use the *map* method. With it we can go
 over the data, and create a component to each one of them.
@@ -582,7 +582,7 @@ have *JSX* inside of the ul. Map returns a new array (JSX element).
 
 ---
 
-### 47 Conditional Rendering with &&
+## 47 Conditional Rendering with &&
 
 ```jsx
 const Menu = () => {
@@ -603,7 +603,7 @@ const Menu = () => {
 
 ---
 
-### 48 Conditional Rendering with Ternaries
+## 48 Conditional Rendering with Ternaries
 
 ```jsx
   const Footer = () => {
@@ -631,7 +631,7 @@ const Menu = () => {
 
 ---
 
-### 49 Conditional Rendering with Multiple Returns
+## 49 Conditional Rendering with Multiple Returns
 
 ```jsx
 const Pizza = (props) => {
@@ -652,7 +652,7 @@ const Pizza = (props) => {
 
 ---
 
-### 50. Extracting JSX into a new Component
+## 50. Extracting JSX into a new Component
 
 Spliting the Footer component in two separate components, Order and Footer.
 
@@ -695,7 +695,7 @@ const Order = (props) => {
 
 ---
 
-### 51. Destructuring Props
+## 51. Destructuring Props
 
 Using destructuring it's easyer to access the values that are passed using props.
 The variable used in the destructuring of the props should have the same name of
@@ -707,7 +707,7 @@ the props being passed from the parent component.
 
 ---
 
-### 52. React Fragments
+## 52. React Fragments
 
 React Fragment allow us to group elements, without leaving any trace on the
 HTML tree (in the DOM).
@@ -753,7 +753,7 @@ and have the nedd to put a key to it.
 
 ---
 
-### 53. Setting Classes and Text Conditionally
+## 53. Setting Classes and Text Conditionally
 
 ```jsx
   const Pizza = ({ pizzaObject }) => {
@@ -774,17 +774,17 @@ and have the nedd to put a key to it.
 
 ---
 
-### 54. Section Summary
+## 54. Section Summary
 
 ![ComponentTree](./img/component-tree.png)
 
 ---
 
-### 57. Let's build a Steps Component
+## 57. Let's build a Steps Component
 
 ---
 
-### 58. Handling Events the React Way
+## 58. Handling Events the React Way
 
 We specify a event listener function directly on the element were it will happen
 
@@ -847,7 +847,7 @@ export default function App() {
 
 ---
 
-### 59. What is State in React
+## 59. What is State in React
 
 ![State](./img/state.png)
 
@@ -872,7 +872,7 @@ that needs to be remenbered throughout the app's lifecycle.
 
 ---
 
-### 60. Creating a State Variable With useState
+## 60. Creating a State Variable With useState
 
 To utilize *State* in *React* we follow 3 basic steps:
 
@@ -987,7 +987,7 @@ statment, functions, loops, etc.
 
 ---
 
-### 61. Don't Set State Manually
+## 61. Don't Set State Manually
 
 ```jsx
 export default function App() {
@@ -1009,13 +1009,13 @@ happens.
 
 ---
 
-### 62. The Mechanics of State
+## 62. The Mechanics of State
 
 ![State Mechanics](./img/state-mechanics.png)
 
 ---
 
-### 63. Adding Another Piece of State
+## 63. Adding Another Piece of State
 
 ```jsx
 const handleIsOpen = () => {
@@ -1063,14 +1063,14 @@ const handleIsOpen = () => {
 
 ---
 
-### 64. React Developer Tools
+## 64. React Developer Tools
 
 Allow us to inspect the component tree,  and manipulate components, (and it's states and props),
 directly from the browser console.
 
 ---
 
-### 65. Updating State Based on Current State
+## 65. Updating State Based on Current State
 
 Update state, based on current state, in the way we're doing it it's fine, but
 it's a fagrile solution.
@@ -1134,7 +1134,7 @@ current state value.
 
 ---
 
-### 66. More Thoughts About State + State Guidelines
+## 66. More Thoughts About State + State Guidelines
 
 ![More about State](./img/more-about-states-01.png)
 
@@ -1145,13 +1145,13 @@ current state value.
 - A React application is about changing state over time, and displaying in
   correctly all the time.
 
-#### Practical Guidelines about State
+### Practical Guidelines about State
 
 ![State GuideLines](./img/state-guidelines.png)
 
 ---
 
-### 72. Building a Form and Handling Submissions
+## 72. Building a Form and Handling Submissions
 
 To use a *Form* in *React* we use the regular *HTML* form
 
@@ -1246,7 +1246,7 @@ const Form = () => {
 
 ---
 
-### 73. Controlled Elements
+## 73. Controlled Elements
 
 By default, the input elements maintain their own state inside the *DOM* (the HTML element itself). In *Reacrt* we like to
 keep the *state* all in one place, wich is inside the application, and not inside the *DOM*. In order to do that, we use
@@ -1322,7 +1322,7 @@ const Form = () => {
 
 ---
 
-### 74. State vs. Props
+## 74. State vs. Props
 
 | State | Props |
 |:----: |:----: |
@@ -1334,8 +1334,196 @@ const Form = () => {
 
 ---
 
-### 75. EXERCISE #1: Flashcards
+## 75. EXERCISE #1: Flashcards
 
 ---
 
-### 76. CHALLENGE #2: Date Counter (v2)
+## 76. CHALLENGE #2: Date Counter (v2)
+
+---
+
+## 78. What is "Thinking in React"?
+
+![Thinking in React](./img/thinking-react-01.png)
+
+### Thinking in React Process
+
+1. Break the UI into components, and stabilsh the *component tree*
+2. Build a static version in *React* (without *State*)
+3. Think about *State*:
+   1. When to use
+   2. Types of *State*: local vs global
+   3. Where to place each piece of *State*
+4. Estabilish **data flow**:
+   1. One-way data flow
+   2. Child-to-parent communication
+   3. Accessing global *State*
+
+![Thinking in React](./img/thinking-react-02.png)
+
+## 79. Fundamentals of State Management
+
+**State management**: Deciding **when** to create pieces of state, what
+**types** of state are necessary, **where** to place each piece of state, and
+how data **flows** through the app.
+
+| Local State | Global (Shared) State |
+| :---------: | :----------: |
+| Needed only by one or few components | Many components might need it |
+| Acessed only by that components, and<br> it's child components | Accessible to every single component<br> in the entire app |
+| Created with *useState* inside of a<br> certain component | Defined using *React Context API* or an external<br> state management library, as *Redux* |
+
+![State Management](./img/state-management-01.png)
+
+It's recomended to start with a local state, and change it to global as needed.
+
+### When and where to use State
+
+![State Management](./img/state-management-02.png)
+
+## 80. Thinking About State and Lifting State Up
+
+Lifting Up the state is moving it from the component, to the closest parent
+component.
+
+In the code below, we need to use the value of *items* of the *Form* component,
+to the *PackingList* component, in order to render the list. But, we cannot use
+*props* to pass the values, because *Form* isn't *PackingList*'s parent. 
+
+```jsx
+const Form = () => {
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [items, setItems] = useState([]);
+
+  const handleAddItem = (item) => {
+    setItems((items) => [...items, item]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!description) {
+      return;
+    }
+
+    const newItem = {
+      id: Date.now(),
+      description: description,
+      quantity: quantity,
+      packed: false,
+    };
+
+    handleAddItem(newItem);
+
+    setDescription("");
+    setQuantity(1);
+
+    console.log(newItem);
+  };
+
+  return (
+    <form className="add-form" onSubmit={handleSubmit}>
+      <h3>What do you need for your 😍 trip?</h3>
+      <select
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
+      >
+        {Array.from({ length: 20 }, (_, i) => i + 1).map((num) => (
+          <option value={num} key={num}>
+            {num}
+          </option>
+        ))}
+      </select>
+      <input
+        type="text"
+        placeholder="Item..."
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <button>Add</button>
+    </form>
+  );
+};
+
+const PackingList = () => {
+  return (
+    <div className="list">
+      <ul>
+        {initialItems.map((item) => (
+          <Item item={item} key={item.id} />
+        ))}
+      </ul>
+    </div>
+  );
+};
+```
+
+In order to fix that, we need to *Lift up the State*, moving the *item* to a
+Component whose is parent to it, and to *PackingList*, wich is the *App*
+component.
+We also move the handler function to the parent, keeping all the logic relative
+to that state on the same component.
+
+```jsx
+export default function App() {
+
+  const [items, setItems] = useState([]);
+
+  const handleAddItem = (item) => {
+    setItems((items) => [...items, item]);
+  };
+
+  return (
+    <div className="app">
+      <Logo />
+      <Form onAddItems={handleAddItem}/> {/*prop name is a convention*/}
+      <PackingList items={items}/>
+      <Stats />
+    </div>
+  );
+}
+```
+
+After that, we pass the *State* variable and the *setter function* down to the
+others components as *props*
+
+```jsx
+export default function App() {
+
+  const [items, setItems] = useState([]);
+
+  setItems((items) => [...items, item]);
+  };
+
+  return (
+    <div className="app">
+      <Logo />
+      <Form />
+      <PackingList />
+      <Stats />
+    </div>
+  );
+}
+```
+
+Whenever multiple sibling components need to have access to the same state, we
+move that state up, to the first common parent component
+
+---
+
+## 81. Reviewing "Lifting Up State"
+
+![SharingState](./img/sharing-state-01.png)
+
+![SharingState](./img/sharing-state-02.png)
+
+![SharingState](./img/sharing-state-03.png)
+
+---
+
+## 82. Deleting an Item: More Child-to-Parent Communication
+
+## 83. Updating an Item: Complex Immutable Data Operation
+
+
