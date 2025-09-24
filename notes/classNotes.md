@@ -1526,4 +1526,20 @@ move that state up, to the first common parent component
 
 ## 83. Updating an Item: Complex Immutable Data Operation
 
+## 84. Derived State
 
+It is *State* that is computed from another piece of *State* or from *props*
+
+In the example below, instead of using 3 pieces of *State*, and having to update
+the 3 of them simultaneously (wich would cause 3 re-renders), *cart* state is
+used as **singel source of truth** for the related data.
+
+![Derived Statge](./img/derived-state-01.png)
+
+That works because updating the *cart* will re-render the component, that
+executes the function again, making that the values for numItems and totalPrice
+to be recalculated.
+
+---
+
+## 85. Calculating Statistics as Derived State
