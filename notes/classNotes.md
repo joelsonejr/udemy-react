@@ -1543,3 +1543,10 @@ to be recalculated.
 ---
 
 ## 85. Calculating Statistics as Derived State
+
+## 86. Sorting Items
+
+## 87. Clearing the List
+
+## 88. Moving Components Into Separate Files
+
