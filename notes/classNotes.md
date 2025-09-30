@@ -1550,3 +1550,116 @@ to be recalculated.
 
 ## 88. Moving Components Into Separate Files
 
+## 90. The "children" Prop: Making a Reusable Button
+
+Going back to the *Steps*  app, to turn the button into a reusabel component.
+
+Changing from this:
+
+```jsx
+<div>
+  <button
+    style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+    onClick={handlePrevious}
+  >
+    Previous
+  </button>
+</div>
+<div>
+  <button
+    style={{ backgroundColor: "#7950f2", color: "#FFF" }}
+    onClick={handleNext}
+  >
+    Next
+  </button>
+</div>
+```
+
+Into this
+
+```jsx
+ <div>
+  <Button
+    bgColor={"#7950f2"}
+    textColor={"#FFF"}
+    onClick={handlePrevious}
+    innerText={"Previous"}
+    emoji="👈🏿"
+  />
+</div>
+<div>
+  <Button
+    bgColor={"#7950f2"}
+    textColor={"#FFF"}
+    onClick={handleNext}
+    innerText={"Next"}
+    emoji="👉🏿"
+  />
+</div>
+
+
+//Button component
+const Button = ({ textColor, bgColor, onClick, innerText, emoji }) => {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      <span>{emoji}</span>
+      {innerText}
+    </button>
+  );
+};
+
+export default Button;
+```
+
+Let's say that in the *previous* button we need to have the emoji **before** the
+text, and in the *next* button we need the emoji to be **after the text**.
+How can we customize the button inner text even more, *WITHOUT* creating another
+prop?
+
+The solution is the *children* prop. It's a prop that every *React* component
+receives, and the value of the children prop is exactly what is between the
+opening and closing tag of the component.
+
+```jsx
+//Adjusting the component to use children
+const Button = ({ textColor, bgColor, onClick, children }) => {
+  return (
+    <button
+      style={{ backgroundColor: bgColor, color: textColor }}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+
+//Providing values to children props
+<div className="buttons">
+  <div>
+    <Button
+      bgColor={"#7950f2"}
+      textColor={"#FFF"}
+      onClick={handlePrevious}
+    >
+      👈🏿 Previous{" "}
+    </Button>
+  </div>
+  <div>
+    <Button
+      bgColor={"#7950f2"}
+      textColor={"#FFF"}
+      onClick={handleNext}
+    >
+      {" "}
+      Next 👉🏿{" "}
+    </Button>
+  </div>
+</div>
+
+```
+
+## 91. More Reusability With the "children" Prop
