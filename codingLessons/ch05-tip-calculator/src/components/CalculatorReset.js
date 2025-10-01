@@ -1,5 +1,5 @@
-const CalculatorReset = ({ onClick }) => {
-  return <button onClick={onClick}>Reset</button>;
+const CalculatorReset = ({ onClick, showElement }) => {
+  return <div>{showElement && <button onClick={onClick}>Reset</button>}</div>;
 };
 
 export default CalculatorReset;

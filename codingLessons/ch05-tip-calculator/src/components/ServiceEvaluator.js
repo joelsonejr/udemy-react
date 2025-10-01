@@ -1,11 +1,5 @@
 const ServiceEvaluator = ({ children, tipValue, onTipChange }) => {
-  const percentageLabels = [
-    "Dissafisfied",
-    "It was ok",
-    "It was good",
-    "Absolute amazing!",
-  ];
-
+  debugger;
   return (
     <p>
       <span>{children}</span>{" "}
