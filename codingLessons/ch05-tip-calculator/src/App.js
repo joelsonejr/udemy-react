@@ -1,52 +1,10 @@
 import "./App.css";
-import CostInput from "./components/CostInput";
-import ServiceEvaluator from "./components/ServiceEvaluator";
-import CalculatorReset from "./components/CalculatorReset";
-import TipOutput from "./components/TipOutput";
-import { useState } from "react";
+import TipCalculator from "./components/TipCalculator";
 
 function App() {
-  const [billValue, setBillValue] = useState("");
-  const [userRating, setUserRating] = useState("");
-  const [friendRating, setFriendRating] = useState("");
-
-  const handleUserRating = (value) => {
-    setUserRating(value);
-  };
-
-  const handleFriendRating = (value) => {
-    setFriendRating(value);
-  };
-
-  const tipTotal = (Number(userRating) + Number(friendRating)) / 2;
-
-  const showElement = Number(billValue) !== 0;
-
-  const resetValues = () => {
-    setBillValue("0");
-    setUserRating("0");
-    setFriendRating("0");
-  };
-
   return (
     <div className="App">
-      <h1>Tip Calculator</h1>
-      <CostInput inputValue={billValue} onValueChange={setBillValue} />
-      <ServiceEvaluator tipValue={userRating} onTipChange={handleUserRating}>
-        <span>How did you like the service?</span>
-      </ServiceEvaluator>
-      <ServiceEvaluator
-        tipValue={friendRating}
-        onTipChange={handleFriendRating}
-      >
-        <span>How did your friend like the service?</span>
-      </ServiceEvaluator>
-      <TipOutput
-        billValue={billValue}
-        tipValue={tipTotal}
-        showElement={showElement}
-      />
-      <CalculatorReset onClick={resetValues} showElement={showElement} />
+      <TipCalculator />
     </div>
   );
 }
