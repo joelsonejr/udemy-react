@@ -6,46 +6,35 @@ import { useState } from "react";
 
 const TipCalculator = () => {
   const [billValue, setBillValue] = useState("");
-  const [userRating, setUserRating] = useState("");
-  const [friendRating, setFriendRating] = useState("");
+  const [userRating, setUserRating] = useState(0);
+  const [friendRating, setFriendRating] = useState(0);
 
-  const handleUserRating = (value) => {
-    setUserRating(value);
-  };
+  const tipTotal = billValue * ((userRating + friendRating) / 2 / 100);
 
-  const handleFriendRating = (value) => {
-    setFriendRating(value);
-  };
-
-  const tipTotal = (Number(userRating) + Number(friendRating)) / 2;
-
-  const showElement = Number(billValue) !== 0;
+  const showElement = billValue > 0;
 
   const resetValues = () => {
-    setBillValue("0");
-    setUserRating("0");
-    setFriendRating("0");
+    setBillValue("");
+    setUserRating(0);
+    setFriendRating(0);
   };
 
   return (
     <div className="App">
       <h1>Tip Calculator</h1>
-      <CostInput inputValue={billValue} onValueChange={setBillValue} />
-      <ServiceEvaluator tipValue={userRating} onTipChange={handleUserRating}>
+      <CostInput inputValue={billValue} onSetBill={setBillValue} />
+      <ServiceEvaluator tipValue={userRating} onSetValue={setUserRating}>
         <span>How did you like the service?</span>
       </ServiceEvaluator>
-      <ServiceEvaluator
-        tipValue={friendRating}
-        onTipChange={handleFriendRating}
-      >
+      <ServiceEvaluator tipValue={friendRating} onSetValue={setFriendRating}>
         <span>How did your friend like the service?</span>
       </ServiceEvaluator>
-      <TipOutput
-        billValue={billValue}
-        tipValue={tipTotal}
-        showElement={showElement}
-      />
-      <CalculatorReset onClick={resetValues} showElement={showElement} />
+      {showElement && (
+        <>
+          <TipOutput billValue={billValue} tipValue={tipTotal} />
+          <CalculatorReset onReset={resetValues} />
+        </>
+      )}
     </div>
   );
 };

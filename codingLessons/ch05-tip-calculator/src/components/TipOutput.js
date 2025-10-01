@@ -1,15 +1,9 @@
-const TipOutput = ({ billValue, tipValue, showElement }) => {
-  const tipAmount = Number(billValue) * (Number(tipValue) / 100);
-
-  const totalCost = Number(billValue) + tipAmount;
+const TipOutput = ({ billValue, tipValue }) => {
+  const totalCost = billValue + tipValue;
 
   return (
     <div>
-      {showElement && (
-        <p
-          style={{ fontWeight: "bold" }}
-        >{`You pay $ ${totalCost} ($${billValue} + $${tipAmount} tip)`}</p>
-      )}
+      <h3>{`You pay $ ${totalCost} ($${billValue} + $${tipValue} tip)`}</h3>
     </div>
   );
 };

@@ -1,12 +1,12 @@
-const CostInput = ({ inputValue, onValueChange }) => {
+const CostInput = ({ inputValue, onSetBill }) => {
   return (
     <p>
-      <span>How much was the bill?</span>
+      <label>How much was the bill?</label>
       <input
-        type="number"
-        placeholder=""
+        type="text"
+        placeholder="Bill value"
         value={inputValue}
-        onChange={(e) => onValueChange(e.target.value)}
+        onChange={(e) => onSetBill(Number(e.target.value))}
       />
     </p>
   );

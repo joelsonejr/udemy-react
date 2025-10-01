@@ -1,9 +1,12 @@
-const ServiceEvaluator = ({ children, tipValue, onTipChange }) => {
+const ServiceEvaluator = ({ children, tipValue, onSetValue }) => {
   debugger;
   return (
     <p>
-      <span>{children}</span>{" "}
-      <select value={tipValue} onChange={(e) => onTipChange(e.target.value)}>
+      <label>{children}</label>{" "}
+      <select
+        value={tipValue}
+        onChange={(e) => onSetValue(Number(e.target.value))}
+      >
         <option value="0">Dissatisfied (0%)</option>
         <option value="5">It was okay (5%)</option>
         <option value="10">It was good (10%)</option>
