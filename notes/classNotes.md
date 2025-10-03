@@ -1663,3 +1663,7 @@ const Button = ({ textColor, bgColor, onClick, children }) => {
 ```
 
 ## 91. More Reusability With the "children" Prop
+
+## 96. Building the Static App: List of Friends
+
+## 97. Building the Static App: Forms
