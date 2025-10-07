@@ -1667,3 +1667,7 @@ const Button = ({ textColor, bgColor, onClick, children }) => {
 ## 96. Building the Static App: List of Friends
 
 ## 97. Building the Static App: Forms
+
+## 98. Displaying the New Friend Form
+
+## 100. Selecting a Friend
