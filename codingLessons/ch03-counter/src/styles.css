@@ -1,0 +1,22 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+button {
+  margin: 5px;
+  width: 45px;
+  height: 45px;
+  font-size: 35px;
+}
+
+.resetButton {
+  margin: 40px;
+  width: 100px;
+  height: 45px;
+  font-size: 35px;
+}
+
+span {
+  font-size: 30px;
+}
