@@ -1671,3 +1671,39 @@ const Button = ({ textColor, bgColor, onClick, children }) => {
 ## 98. Displaying the New Friend Form
 
 ## 100. Selecting a Friend
+
+## 106. Setting Up the "usePopcorn" Project
+
+## 107. How to Split a UI Into Components
+
+Learn when and how to split interfaces into components
+
+### Component size
+
+![Comnponent size chart](./img/component-size.png)
+
+We should avoid using large components, or two small components. The final goal
+is to achieve a balance.
+
+![Split into components](./img/split-into-components.png)
+
+The 4 criteria to for splitting a UI into Components:
+
+1. Logical separation of content/layout
+2. Reusability
+3. Responsability/ complexity
+4. Personal coding style
+
+**Sugestion:** When in doubt, start with a relatively big component, then split
+it into smaller components as necessary
+
+The four criteria above will help to understand when it's necessary to break a
+component into smaller ones
+
+![Split into components](./img/split-into-components-02.png)
+
+### General Guidelines
+
+![Split into components](./img/split-into-components-03.png)
+
+The smaller the components are, more reusable they tend to be.
