@@ -1707,3 +1707,28 @@ component into smaller ones
 ![Split into components](./img/split-into-components-03.png)
 
 The smaller the components are, more reusable they tend to be.
+
+---
+
+## 109. Component Categories
+
+Most of the components will fall under those 3 categories
+
+1. Stateless/ presentational components
+   - No State
+   - Can receive Props, and simply present received data
+   - Usually small and reusable
+2. Stateful components
+   - Have State
+   - Can still be reused
+3. Structural components
+   - Pages, layouts or screend of the application
+   - Result of **composition**
+   - Can be huge and no reusable (but don't have to)
+
+---
+
+## 110. Prop Drilling
+
+Is the need to pass data as props through several components, in order to
+reach a deeply nested component.
