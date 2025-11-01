@@ -1732,3 +1732,155 @@ Most of the components will fall under those 3 categories
 
 Is the need to pass data as props through several components, in order to
 reach a deeply nested component.
+
+## 111. Component Composition
+
+![Component Composition](./img/component-composition.png)
+
+```jsx
+function Modal () {
+  return (
+    <div className="modal">
+      <Sucess />
+    </div>
+  )
+}
+
+//Success component file
+function Success () {
+  return <p>Well done!</p>
+}
+
+//Error component file
+function Error () {
+  return <p>Application Error!</p>
+}
+
+//in the app itself
+<Modal>
+```
+
+When the component is used like this, inside of another component it's ties the
+two components in a way that keeps the Modal component from be reused. Making it
+basically a "success modal". It will become a single component.
+
+In order to avoi this, comes the *Compoent Compositon*. It's done by passing
+the inner componet through the *children prop*. This approach will enable the
+*Modal* component to receive several types of components.
+
+```jsx
+
+//Modal component file
+function Modal ({children}) {
+  return (
+    <div className="modal">
+      {children}
+    </div>
+  )
+}
+
+//Success component file
+function Success () {
+  return <p>Well done!</p>
+}
+
+//Error component file
+function Error () {
+  return <p>Application Error!</p>
+}
+
+//in the app itself
+<Modal>
+  <Success />
+</Modal>
+
+<Modal>
+  <Error />
+</Modal>
+```
+
+**Component Composition** is combining different components using the *children*
+prop (or other explicitly defined prop).
+
+Composition use cases:
+
+1. Create highly reusable components
+2. Fix prop drilling
+
+Composition is only possible because components **don't need to know** their
+children in advance
+
+---
+
+## 112. Fixing Prop Drilling With Composition (And Building a Layout)
+
+## 113. Using Composition to Make a Reusable Box
+
+## 114. Passing Elements as Props (Alternative to children)
+
+Another way of passing the components is using an especific prop to do it.
+
+Below, we're using the child prop to pass down components do the *Box* component
+
+```jsx
+//app
+      <Main>
+        <Box>
+          <MovieList movies={movies} />
+        </Box>
+        <Box>
+          <WatchedSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
+        </Box>
+      </Main>
+
+//box component
+const Box = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="box">
+      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
+        {isOpen ? "–" : "+"}
+      </button>
+      {isOpen && children}
+    </div>
+  );
+};
+```
+
+Another way of doing it is creating an prop for it. The prop can have any
+choosen name.
+
+```jsx
+//box component
+const Box = ({ element }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="box">
+      <button className="btn-toggle" onClick={() => setIsOpen((open) => !open)}>
+        {isOpen ? "–" : "+"}
+      </button>
+      {isOpen && element}
+    </div>
+  );
+};
+
+//app
+      <Main>
+        <Box element={<MovieList movies={movies} />} />
+        <Box element={
+          <>
+          <WatchedSummary watched={watched} />
+          <WatchedMovieList watched={watched} />
+          </>
+        } />
+      </Main>
+```
+
+Using *children* is the prefered way of doing things.
+
+---
+
+##
