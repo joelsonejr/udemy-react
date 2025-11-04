@@ -1883,4 +1883,131 @@ Using *children* is the prefered way of doing things.
 
 ---
 
-##
+## 115. Building a Reusable Star Rating Component
+
+In order to guarantee maximum reusability for the rating component, it will be
+created on a separeted file, and all it's style information will be contained on
+it.
+
+```jsx
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+
+const StarRating = ({ maxRating = 5 }) => {
+  return (
+    <div style={containerStyle}>
+      <div style={starContainerStyle}>
+        {Array.from({ length: maxRating }, (_, i) => (
+          <span>S{i + 1}</span>
+        ))}
+      </div>
+      <p style={textStyle}>{maxRating}</p>
+    </div>
+  );
+};
+
+export default StarRating;
+```
+
+Breaking down this component, we have:
+
+The styles being applied. An object containing the style information is passed
+to the *style={ }* property
+
+```jsx
+const containerStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "16px",
+};
+
+const starContainerStyle = {
+  display: "flex",
+  gap: "4px",
+};
+
+const textStyle = {
+  lineHeight: "1",
+  margin: "0",
+};
+```
+
+An array method, used to create the stars dinamically
+
+```jsx
+{Array.from({ length: maxRating }, (_, i) => (
+          <span>S{i + 1}</span>
+        ))}
+```
+
+The value for star length is received through props. A default values is
+assigned to *maxRating*, so the component can be rendered, even if the user
+does not provide a value to the prop. In the example below, the value 5 is
+set as default. That's possible due to object destructuring
+
+```jsx
+const StarRating = ({ maxRating = 5 })
+```
+
+---
+
+## 116. Creating the Stars
+
+## 117. Handling Hover Events
+
+## 118. Props as a Component API
+
+![Prop Creator x Prop Consumer](./img/props-creator-consumer.png)
+
+When creating a component we should always have in mind that it might be used by
+someone else. From that perspective, the creator writes the components, with
+all necessary props, and the user implements that component, using the props
+to communicate with the component.
+So, the *props* works as a the public API from the component. As creators, when
+we define the props a given component will use, we're defining the public
+interface of that component. At the same time, we're choosing how much of the
+complexity of the component we want to expose to the consumer of the API.
+
+![alt text](./img/props-api-complexity.png)
+
+When defining the props that will be exposed to the user, we should try to
+strike a good balance between *too little* and *too many* props. After all,
+that's what will define how much complexity we're exposing to the user.
+
+---
+
+## 120. PropTypes
+
+*PropTypes* allows us to specify the type of the value, that we expect to be
+passed in to each of the component props. Typescript is more indicated in those
+circunstances, but *React* has built in propTypes that will be used below, in
+order to show how it works.
+
+```jsx
+import PropTypes from {prop-types}
+
+StarRating.propTypes = {
+  maxRating: PropTypes.number,
+  defaultRating: PropTypes.number,
+  color: PropTypes.string,
+  size: PropTypes.number,
+  messages: PropTypes.array,
+  className: PropTypes.string
+  onSetRating: PropTypes.func,
+}
+```
+
+In case the type doens't match, there will be a warning in the browser console.
