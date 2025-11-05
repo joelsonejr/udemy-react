@@ -22,16 +22,19 @@ const StarRating = ({
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
-  const handleRating = (rating) => {
-    setRating(rating);
-    onSetRating(rating);
-  };
-
   const textStyle = {
     lineHeight: "1",
     margin: "0",
     color,
     fontSize: `${size / 1.5}px`,
+  };
+
+  const handleRating = (rating) => {
+    setRating(rating);
+
+    if (onSetRating) {
+      onSetRating(rating);
+    }
   };
 
   return (
@@ -49,11 +52,12 @@ const StarRating = ({
           />
         ))}
       </div>
-      <p style={textStyle}>
-        {messages
-          ? messages[tempRating ? tempRating - 1 : rating - 1]
-          : tempRating || rating || ""}
-      </p>
+      <Messages
+        messages={messages}
+        tempRating={tempRating}
+        rating={rating}
+        messageStyle={textStyle}
+      />
     </div>
   );
 };
@@ -99,6 +103,18 @@ const Star = ({ onRate, full, onHoverIn, onHoverOut, color, size }) => {
         </svg>
       )}
     </span>
+  );
+};
+
+const Messages = ({ messages, tempRating, rating, messageStyle }) => {
+  const hasMessages = messages.length >= 1;
+  const selectedMessage = tempRating ? tempRating - 1 : rating - 1;
+  const availableRating = tempRating || rating || "";
+
+  return (
+    <p style={messageStyle}>
+      {hasMessages ? messages[selectedMessage] : availableRating}
+    </p>
   );
 };
 
