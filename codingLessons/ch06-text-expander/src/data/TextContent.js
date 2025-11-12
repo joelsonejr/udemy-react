@@ -5,8 +5,7 @@ const TextData = [
         but believe it or not, space travel is a real thing. Humans and robots
         are constantly venturing out into the cosmos to uncover its secrets and
         push the boundaries of what's possible.`,
-    buttonColor: "",
-    collapsedNumWords: 65,
+    collapsedNumWords: 20,
     expanded: false,
     className: "",
     expandText: "Show More",
@@ -19,7 +18,6 @@ const TextData = [
         results are out of this world. Think about the first time humans stepped
         foot on the moon or when rovers were sent to roam around on Mars.`,
     buttonColor: "#ff6622",
-    collapsedNumWords: 181,
     expanded: false,
     className: "textContainer",
     expandText: "Show Text",
@@ -30,8 +28,6 @@ const TextData = [
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
         discover next!`,
-    buttonColor: "",
-    collapsedNumWords: 66,
     expanded: "true",
     className: "box",
     expandText: "Show More",
