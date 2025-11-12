@@ -22,7 +22,7 @@ const TextExpander = ({
 
   return (
     <div className={className}>
-      {isExpanded ? text : resumeText(text)}{" "}
+      <span>{isExpanded ? text : resumeText(text)}</span>
       <button
         style={{ color: `${buttonColor}` }}
         onClick={handleToggleSentence}
