@@ -1388,7 +1388,7 @@ component.
 
 In the code below, we need to use the value of *items* of the *Form* component,
 to the *PackingList* component, in order to render the list. But, we cannot use
-*props* to pass the values, because *Form* isn't *PackingList*'s parent. 
+*props* to pass the values, because *Form* isn't *PackingList*'s parent.
 
 ```jsx
 const Form = () => {
@@ -2011,3 +2011,38 @@ StarRating.propTypes = {
 ```
 
 In case the type doens't match, there will be a warning in the browser console.
+
+---
+
+## 124. Components, Instances, and Elements
+
+![React Element](./img/reactElement.png)
+
+### Component
+
+- Is a piece of UI
+- It's a JS function, that returns *React* elements (element tree), usually
+  written in *JSX*
+- It works as a blueprint or a template
+
+### Component Instance
+
+- Instances are created when we use components
+- Actual **"physical" manifestation** of a component
+- Has it's own state and props
+- Has a **lifecycle**
+
+![Component instance](./img/componentInstance.png)
+
+### React Element
+
+- JSX is converted to *React.createElement()* function calls.
+- A *React* element is **the result of these function calls**
+- Information necessary to create *DOM* elements
+
+### DOM Element (HTML)
+
+- Visual representation of the component instance in the browser
+
+![DOM element generated from a component instance](./img/dom-element.png)
+
