@@ -2046,3 +2046,31 @@ In case the type doens't match, there will be a warning in the browser console.
 
 ![DOM element generated from a component instance](./img/dom-element.png)
 
+---
+
+## 126. How Rendering Works: Overview
+
+![Component life cycle recap](./img/component-life-cycle.png)
+
+In *React* rendering is **not** updating or displaying elements on the screen.
+Rendering only happens **internally** inside *React*, it **does not** produces
+visual changes.
+
+![Rendering process](./img/rendering-process.png)
+
+### Render is Triggered
+
+- The two situations that trigger renders
+  1. Initial render of application
+  2. *state* is update in one or more component instances (re-render)
+  
+- The render process is triggered for the **entire application**. It may look as
+  only the component where the state update happens is re-rendered, but that's
+  not how it works.
+- Renders are triggered immediately, but *scheduled* for when the *JS* engine
+  has some "free time". There is also batching of multiple *setState* calls in
+  event handlers.
+
+---
+
+## 127. How Rendering Works: The Render Phase
