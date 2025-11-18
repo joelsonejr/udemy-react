@@ -2067,10 +2067,163 @@ visual changes.
 - The render process is triggered for the **entire application**. It may look as
   only the component where the state update happens is re-rendered, but that's
   not how it works.
-- Renders are triggered immediately, but *scheduled* for when the *JS* engine
+- Renders are not triggered immediately, but *scheduled* for when the *JS* engine
   has some "free time". There is also batching of multiple *setState* calls in
   event handlers.
 
 ---
 
 ## 127. How Rendering Works: The Render Phase
+
+![Rendering review](./img/render-phase-01.png)
+
+Some misconceptions in the image above are:
+
+1. Rendering is not about the view, or the *DOM*. It's about calling component
+   functions.
+2. The *DOM* will not be updated for the entire component instance.
+
+### The Render Phase
+
+1. *React* will find all the components that triggered a re-render, all call
+   their's correpondent component function.
+2. That will create updated *React* elements, that all toghether make up the
+   *Virtual DOM*
+
+![Virtual DOM](./img/virtual-dom.png)
+
+#### Virtual DOM
+
+In the initial render, *React* will take the entire component tree, and transform
+it into a one big *React* element, called the *React Element Tree*. That's what
+is called *virtual DOM*
+
+- **Virtual DOM** is the tree of all *React* elements created from all instances in
+the *component tree*
+
+- It is cheap and fastto create multiple *React elements trees*, because it's
+  nothing more than a JS object
+
+![Virtual DOM](./img/virtual-dom-02.png)
+
+- If a *state* update happens, a new *React element tree* will be created.
+
+![Virual DOM update](./img/virtual-dom-03.png)
+
+🚨 It's important to notice that rendering a component will cause **all of it's
+child components to be rendered as well** ( no matter if props changed or not).
+
+![Virtual DOM update](./img/virtual-dom-04.png)
+
+It means that if you update the highest component on the component tree, every
+child of that component will be re-rendered.
+
+![Virtual DOM update](./img/virtual-dom-05.png)
+
+*Reacts* does this because it doesn't know before hand if an update on a
+component will affect or not that components childs's. So, it will update
+everything under the updated parent component.
+We should also notice that it doesn't meant that the entire *DOM* will be
+updated. Only the *virtual DOM* will be recreated.
+
+The newly created *virtual DOM* will be reconciled with the current *Fiber Tree*,
+that exists before the state update. This process is perfomed in *React's reconciler*,
+wich is called *Fiber*. The output of this reconciliation will be an updated
+*Fiber tree*
+
+![Reconciliation](./img/reconciliation-01.png)
+
+#### Reconciliation
+
+It's a proccess that decides which *DOM* elements need to be inserted, deleted or
+updated, in order to reflect the latest state changes.
+The result of the *Reconciliation* will be a list of DOM operations that are
+necessary to update the current *DOM* with the new *state*
+
+The Reconciler is like the engine of *React*. It keeps us from touching the *DOM*
+directly. It tells *React* how the next snapshot of the UI should look like,
+based on *state*. The current reconciler in *React* is called *Fiber*
+
+##### Reconciler: Fiber
+
+In the initial render of the app, fiber takes the *React element tree*
+  (virtual DOM) and builds a *Fiber tree*
+
+![Fiber Tree](./img/fibre-01.png)
+
+It's  an internal tree that has a *fiber* for each component instance and *DOM*
+element
+
+Fibers are **not** recreated on every render. It's never destroyed. It's only
+mutated over and over again, in future *reconciliation* steps.
+
+Fiber keeps track of:
+
+![Fiber Tree](./img/fiber-02.png)
+
+While in the *Rect Element Tree* the elements are organized in *parent x child*
+relationship, in the *Fiber tree* it's first child has a link to it's parents,
+and all the other children have a link to their previous sibling. This structure
+is called a *linked list*
+
+Both trees hold *React* elements and regular *html* elements, such as the *h3*
+and the *button* elements. Both trees are a complete representation of the entire *DOM*
+structure.
+
+Having *Fibers* as  *units of work*, it allows the work to be performed
+**asynchronously**. That bring the possibility of having the rendering process
+split into chunks, tasks can be prioritizes, and work can be **paused, reused**
+or **throwed away**. So long renders don't pause the JS engine.
+
+That's only possible because the *Render* phase doesn't produce any visible
+output for the *DOM*
+
+#### Reconciliation Process
+
+- A state update occurs
+- That triggers a re-render
+- A new *Virtual DOM* is created
+- The new *Virtual DOM* is reconciled with the current *Fiber Tree*
+- It will generate an *Update Fiber Tree (workInProgress)*
+
+When *Reconciliation* needs to happen, *Fiber* walks through the tree, step by
+step, and analyses exactly what needs to change between the current *Fiber tree*
+and the *Updated Fiber Tree*, based on the new *Virtual DOM*
+
+The process of comparing elements based on their position in the tree is
+called **Diffing**
+
+When the process is over, all changes will be placed in a list called
+*List of Effects*, that will be used in the *Commit Phase* to update the *DOM*
+
+![Reconciliation Process](./img/reconciliation-02.png)
+
+### Back to the Render Phase
+
+![End of the Render Phase](./img/render-phase-02.png)
+
+---
+
+## 128. How Rendering Works: The Commit Phase
+
+The *Commit Phase* is when **React writes to the DOM**: insertion deletes and
+updates (list of *DOM* updates are "flushes" to the *DOM*)
+
+**Commiting is synchronous**. *DOM* is updated in one go, to prevent that
+partial results are showed, keeping a cohesive UI.
+
+After the commiting, the *workInProgress* fiber tree becomes the current fiber
+tree **for the next render cycle**
+
+The browser will then notice that the DOM has been changed, and it will repaint
+the screen. whenever it has some iddle time.
+
+The library responsible for writting to the DOM isn't React itself, but
+*React DOM* . It happens because React was designed to be use independently of
+the platform (host).
+
+![Commit Phase](./img/commit-phase.png)
+
+### Recap
+
+![Rendering Recap](./img/rendering-recap.png)
