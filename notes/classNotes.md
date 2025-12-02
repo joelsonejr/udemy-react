@@ -2227,3 +2227,46 @@ the platform (host).
 ### Recap
 
 ![Rendering Recap](./img/rendering-recap.png)
+
+---
+
+## 129. How Diffing Works
+
+Diffing is comparing two elements step by step between two renders, based on their position in the tree.
+
+It's based in two fundamental assumptions:
+
+1. Two elements of different types will produce **diferrent trees**
+2. Elements with a stable key prop **stay the same across renders**
+
+![Diffing](./img/diffing-01.png)
+
+![Diffing](./img/diffing-02.png)
+
+---
+
+## 131. The Key Prop
+
+- It's a special prop that's used to tell the diffing algorithm that an element is unique.
+- Allows react to distinguish among multiple instances of the same component type.
+- When a key **stays the same across renders**, the element will be kept in the *DOM*
+  (even if the position in the tree has changed)
+- When a key **changes between renders**, the element will be destroyed and a new one
+  will be created (even it the position in the tree is the same between renders)
+- The big cases for the *key* prop use are:
+
+1. Using key in lists (stable key)
+
+   ![Key Prop stable key](./img/keyprop-01.png)
+
+   It's important to always use the *key* prop, when we have multiple child elements of
+   the same type
+
+2. Using keys to reset *state* (changing key)
+
+![Key Prop changing key](./img/keyprop-02.png)
+
+To solve that, we can use the *key* prop, in order to allow *React* that a change happend,
+and that the state should be updated
+
+![Key Prop changing key](./img/keyprop-03.png)
