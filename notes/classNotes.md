@@ -2270,3 +2270,90 @@ To solve that, we can use the *key* prop, in order to allow *React* that a chang
 and that the state should be updated
 
 ![Key Prop changing key](./img/keyprop-03.png)
+
+---
+
+## 134. Rules for Render Logic: Pure Components
+
+### The two type  of logic in *React* components
+
+#### Render Logic
+
+- Code that lives at the top level of the component function
+- Participates in describing how the component view looks like
+- Executed every time the component renders
+  
+#### Event Handler Function
+
+- Executed as the consequence of the event that the handler is listening for
+- Code that actually **does things**: update state, perform an HTTP request,
+read an input field, navigate to another page, etc.
+
+![React Logic](./img/react-logic-01.png)
+
+*React* requires that components are pure when it comes do *Render Logic*.
+
+#### What does *pure* mean?
+
+##### Function Programming Principles
+
+- **Side effect**: dependency on or modification of any data outside the function
+  scope. Ex.: HTTP requests, mutating external variables
+
+- **Pure Function**: a function that has no side effects. Does not change any
+  variables outside its scope.
+- Given the same input, a pure function **always** returns the **same output**
+
+### Rules for Render Logic
+
+- Components **must be pure** when it comes do render logic: given the same props
+  (input), a component instance should always return the same JSX (output)
+- Render logic **should not** produce any side effects: no interaction with the
+  "outside world" is allowed. So, in render logic:
+  - Do not perform network requests
+  - Do not start timers
+  - Do not directly use the DOM API
+  - Do not mutate objects or variables outside the function scope (that's why we
+  can't mutate props)
+  - Do not update state or refs (this will create an infinite loop)
+- Side effect are allowed in **event handler functions**
+- There's also a special hook to register side effects (useEffect)
+
+---
+
+## 135. State Update Batching
+
+![update-batching](./img/update-batching-01.png)
+
+The state updates above will be batched in a single event update for the entire
+event handler
+
+### Batching in event handler functions
+
+![update-batching-02](./img/update-batching-02.png)
+
+- An state update will only be reflected in the state variable after the re-render
+- Updated state variables are not immediately available after set state call, but
+only after the re-render
+- This is also valid when there's only one state variable being updated
+- If we need to update state **based on previous update**, we use setState
+  with callback
+
+  ````typescript
+  const [answer, setAnswer] = useState();
+
+  setAnswer(answer => setAnswer('value'))
+  ````
+
+### Batching beyond event handler functions
+
+![update-batching](./img/update-batching-03.png)
+
+We can **opt out** of automatic batching by wrapping a state update in 
+
+```typescript
+*ReactDOM.flushSync()
+```
+---
+
+##
